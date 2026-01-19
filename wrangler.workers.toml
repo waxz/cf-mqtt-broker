@@ -1,0 +1,20 @@
+name = "mqtt-broker"
+main = "src/_worker.js"
+compatibility_date = "2026-01-01"
+
+
+
+# Durable Objects configuration
+[durable_objects]
+bindings = [
+  { name = "MQTT_BROKER", class_name = "MQTTBroker" }
+]
+
+# Durable Objects migration
+[[migrations]]
+tag = "<v1>"
+new_sqlite_classes = ["MQTTBroker"]
+
+# Optional: Environment variables
+[vars]
+# Add any environment variables here

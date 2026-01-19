@@ -1,0 +1,16 @@
+name = "mqtt-broker"
+compatibility_date = "2026-01-01"
+
+pages_build_output_dir="src"
+
+
+# Durable Objects configuration
+[durable_objects]
+bindings = [
+  { name = "MQTT_BROKER", class_name = "MQTTBroker",script_name ="mqtt-broker" }
+]
+
+
+# Optional: Environment variables
+[vars]
+# Add any environment variables here
