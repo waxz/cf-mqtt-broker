@@ -24,12 +24,13 @@ export default {
 
 // ============================================================================
 // DURABLE OBJECT: Max Performance MQTT Broker (Batched I/O)
+// https://developers.cloudflare.com/durable-objects/examples/websocket-hibernation-server/
 // ============================================================================
 
 export class MQTTBroker extends DurableObject {
-  constructor(state, env) {
-    super(state, env);
-    this.state = state;
+  constructor(ctx, env) {
+    super(ctx, env);
+    
     this.MQTT_PATH = env.MQTT_PATH || "/mqtt";
     
     this.clients = new Map(); 
@@ -56,7 +57,7 @@ export class MQTTBroker extends DurableObject {
     if (url.pathname === this.MQTT_PATH) {
       const pair = new WebSocketPair();
       const [client, server] = Object.values(pair);
-      this.state.acceptWebSocket(server);
+      this.ctx.acceptWebSocket(server);
       return new Response(null, {
         status: 101, webSocket: client,
         headers: { "Sec-WebSocket-Protocol": request.headers.get('Sec-WebSocket-Protocol') || "mqtt" }
