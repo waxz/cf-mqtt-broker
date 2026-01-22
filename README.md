@@ -25,6 +25,7 @@ npm i
 
 ```bash
 rustup default stable
+cargo install worker-build
 ```
 
 ```bash
@@ -49,6 +50,10 @@ npx wrangler dev -c ./wrangler.workers.rust.toml
     npx wrangler secret put MQTT_PATH -c ./wrangler.workers.toml
     # Enter your desired password when prompted
     ```
+    - Rust Workers
+    ```bash
+    npx wrangler secret put MQTT_PATH -c ./wrangler.workers.rust.toml
+    ```
     - Pages
     ```bash
     npx wrangler pages secret put MQTT_PATH
@@ -60,6 +65,12 @@ npx wrangler dev -c ./wrangler.workers.rust.toml
     ```bash
     npx wrangler deploy -c ./wrangler.workers.toml
     ```
+    - Rust Workers
+    
+    ```bash
+    npx wrangler deploy -c ./wrangler.workers.rust.toml
+    ```
+
     - Pages
 
     ```bash
