@@ -21,6 +21,24 @@ npm i
   npx wrangler dev -c ./wrangler.workers.toml
   ```
 
+3. **Rust**
+
+```bash
+rustup default stable
+```
+
+```bash
+cargo clean
+rm -r .cargo
+```
+
+```bash
+worker-build --release
+```
+```bash
+npx wrangler dev -c ./wrangler.workers.rust.toml
+```
+
 
 ## 🚀 Deployment
 

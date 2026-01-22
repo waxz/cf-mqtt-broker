@@ -1,12 +1,18 @@
 import mqtt from "mqtt";
 
 // Configuration
-let HTTP_HOST = "http://localhost:8788";
+let HTTP_HOST = "http://localhost:8787";
 
+
+let name = "node-1"
+if (process.argv.length > 2){
+
+  name = process.argv[2];
+}
 
 let MQTT_PATH = "/mqtt_sec1"
 
-const PUBLISH_RATE=1; //2000ms = 2 seconds
+const PUBLISH_RATE=1000; //2000ms = 2 seconds
 
 console.log("--- Starting MQTT Client ---");
 
@@ -62,7 +68,7 @@ client.on('connect', () => {
         const payload = JSON.stringify({
           id: msgCounter,
           ts: new Date().toLocaleTimeString(),
-          msg: "Hello from Client loop! msgCounter: " + msgCounter
+          msg: `Hello from Client ${name}! msgCounter: ` + msgCounter
         });
 
         console.log(`📤 Publishing: ${payload}`);
@@ -80,7 +86,6 @@ client.on('message', (topic, message) => {
   // message is Buffer
   console.log(`📩 Received on [${topic}]: ${message.toString()}`);
 });
-
 client.on('error', (error) => {
   console.error('❌ Connection error:', error.message);
 });
@@ -108,3 +113,18 @@ client.on('packetreceive', (packet) => {
     console.log('<< Received packet:', packet.cmd);
   }
 });
+
+
+// client.on('message', (topic, message) => {
+//   console.log('Raw bytes:', Array.from(message));
+//   console.log('As string:', message.toString());
+//   console.log('As JSON:', JSON.parse(message.toString()));
+// });
+
+// client.on('packetsend', (packet) => {
+//   console.log('SEND:', JSON.stringify(packet, null, 2));
+// });
+
+// client.on('packetreceive', (packet) => {
+//   console.log('RECV:', JSON.stringify(packet, null, 2));
+// });
